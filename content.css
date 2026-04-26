@@ -1,0 +1,501 @@
+/* ── Moodle Feedback Helper panel ─────────────────────────────────────── */
+
+#mfh-panel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 290px;
+  background: #ffffff;
+  border: 2px solid #d97706;
+  border-top: none;
+  border-radius: 10px;
+  box-shadow: 0 8px 36px rgba(0, 0, 0, 0.38), 0 2px 8px rgba(0, 0, 0, 0.22);
+  z-index: 2147483647;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  color: #1c1e23;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── Header ── */
+
+#mfh-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  background: #f59e0b;
+  color: #1a0a00;
+}
+
+.mfh-title {
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+}
+
+#mfh-collapse {
+  background: none;
+  border: none;
+  color: rgba(26, 10, 0, 0.6);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  transition: color 0.15s;
+}
+#mfh-collapse:hover { color: #1a0a00; }
+
+/* ── Body ── */
+
+#mfh-body {
+  padding: 11px 12px 10px;
+}
+
+#mfh-student-row {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-bottom: 10px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.mfh-label {
+  font-size: 9.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9399a6;
+  flex-shrink: 0;
+}
+
+#mfh-student {
+  font-weight: 600;
+  font-size: 13px;
+  color: #1c1e23;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Folder row ── */
+
+#mfh-folder-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.mfh-folder-name-display {
+  flex: 1;
+  font-size: 11.5px;
+  color: #2b3044;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#mfh-folder-btn {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid #d0d4de;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 13px;
+  cursor: pointer;
+  line-height: 1.4;
+  transition: background 0.12s, border-color 0.12s;
+}
+#mfh-folder-btn:hover { background: #edf0f9; border-color: #b3c4e8; }
+#mfh-folder-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── File list ── */
+
+#mfh-file-list {
+  margin-bottom: 10px;
+  min-height: 28px;
+}
+
+.mfh-file {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 8px;
+  margin-bottom: 5px;
+  background: #f4f6fb;
+  border: 1px solid #dde2ee;
+  border-radius: 6px;
+  cursor: grab;
+  transition: background 0.12s, border-color 0.12s, transform 0.1s;
+}
+
+.mfh-file:last-child { margin-bottom: 0; }
+
+.mfh-file:hover {
+  background: #e8eef9;
+  border-color: #b3c4e8;
+}
+
+.mfh-file.mfh-dragging {
+  opacity: 0.55;
+  transform: scale(0.98);
+  cursor: grabbing;
+}
+
+.mfh-file-icon {
+  font-size: 17px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.mfh-file-name {
+  flex: 1;
+  font-size: 11.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #2b3044;
+}
+
+.mfh-inject-btn {
+  flex-shrink: 0;
+  background: #1e3a6e;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.mfh-inject-btn:hover { background: #0f2453; }
+
+.mfh-empty {
+  font-size: 12px;
+  color: #9399a6;
+  font-style: italic;
+  padding: 3px 0;
+}
+
+/* ── Toolbar ── */
+
+#mfh-toolbar {
+  margin-bottom: 7px;
+}
+
+#mfh-refresh-btn {
+  width: 100%;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid #d0d4de;
+  border-radius: 5px;
+  background: #f8f9fc;
+  color: #2b3044;
+  transition: background 0.12s;
+}
+#mfh-refresh-btn:hover { background: #edf0f9; }
+
+
+.mfh-reselect-btn {
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #f59e0b;
+  border-radius: 5px;
+  background: #fefce8;
+  color: #92400e;
+  transition: background 0.12s;
+}
+.mfh-reselect-btn:hover { background: #fef3c7; }
+
+/* ── Status ── */
+
+#mfh-status {
+  font-size: 11px;
+  min-height: 15px;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+#mfh-status[data-type="ok"]   { color: #1d7a3a; }
+#mfh-status[data-type="warn"] { color: #b45309; }
+#mfh-status[data-type="error"]{ color: #be2318; }
+
+/* ── Tabs ── */
+
+.mfh-tabs {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.mfh-tab {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: rgba(255,255,255,0.65);
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.mfh-tab:hover { color: #ffffff; background: rgba(255,255,255,0.25); }
+.mfh-tab.active {
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* ── Mark tab open button ── */
+
+#mfh-mark-tab {
+  padding: 10px 0 4px;
+}
+
+#mfh-mark-open-btn {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: #16a34a;
+  color: #ffffff;
+  transition: background 0.15s;
+}
+#mfh-mark-open-btn:hover { background: #15803d; }
+
+/* ── Modal overlay ── */
+
+#mfh-modal-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483646 !important;
+  background: rgba(0,0,0,0.75);
+  overflow-y: auto;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  color: #1c1e23;
+}
+
+.mfh-modal-content {
+  background: #ffffff;
+  max-width: 720px;
+  margin: 40px auto;
+  border-radius: 10px;
+  border-top: 5px solid #f59e0b;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.55), 0 4px 16px rgba(0,0,0,0.3);
+}
+
+/* ── Modal header ── */
+
+.mfh-modal-header {
+  background: #0f172a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.mfh-modal-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.8);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: color 0.15s, background 0.15s;
+}
+.mfh-modal-close:hover { color: #ffffff; background: rgba(255,255,255,0.15); }
+
+/* ── Modal body wrapper ── */
+
+#mfh-modal-body {
+  padding: 18px 24px 24px;
+}
+
+/* ── Rubric tables ── */
+
+.mfh-rubric-table-wrap {
+  margin-bottom: 18px;
+  border: 1px solid #e2e6f0;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.mfh-rubric-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  table-layout: fixed;
+}
+
+.mfh-rubric-cell {
+  padding: 7px 10px;
+  border: 1px solid #e2e6f0;
+  vertical-align: top;
+  line-height: 1.45;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.1s;
+  word-wrap: break-word;
+}
+.mfh-rubric-cell:hover { background: #f0f4ff; }
+.mfh-rubric-cell.selected {
+  background: #feff9c !important;
+  border-color: #f5c400;
+  color: #1a1200;
+  font-weight: 600;
+}
+
+.mfh-rubric-cell--checkbox {
+  cursor: default;
+  background: #fafafa;
+}
+.mfh-rubric-cell--checkbox:hover { background: #fafafa; }
+
+.mfh-rubric-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #374151;
+}
+.mfh-rubric-checkbox {
+  flex-shrink: 0;
+  margin-top: 2px;
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+  accent-color: #0f172a;
+}
+
+.mfh-loading {
+  padding: 14px 0;
+  font-size: 12.5px;
+  color: #9399a6;
+  font-style: italic;
+}
+.mfh-loading--error { color: #be2318; font-style: normal; }
+
+/* ── Moodle grade box ── */
+
+.mfh-grade-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fefce8;
+  border: 2px solid #f59e0b;
+  border-radius: 7px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+}
+
+.mfh-grade-box-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.mfh-grade-select {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #93c5fd;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #1e3a6e;
+  cursor: pointer;
+}
+.mfh-grade-select:focus {
+  outline: 2px solid #1e3a6e;
+  outline-offset: 1px;
+}
+
+/* ── Overall comments ── */
+
+.mfh-comments-section {
+  margin: 18px 0 14px;
+}
+
+.mfh-comments-label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.mfh-overall-comments {
+  display: block;
+  width: 100%;
+  min-height: 80px;
+  font-size: 12.5px;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  resize: vertical;
+  box-sizing: border-box;
+  font-family: inherit;
+  color: #374151;
+}
+
+/* ── Action row ── */
+
+.mfh-action-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.mfh-upload-btn {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.mfh-upload-btn:hover { background: #1e3a6e; }
+
+.mfh-clear-btn {
+  padding: 10px 14px;
+  font-size: 12.5px;
+  background: #f3f4f6;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.mfh-clear-btn:hover { background: #e5e7eb; }

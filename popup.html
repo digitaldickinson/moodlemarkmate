@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 250px;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      color: #1c1e23;
+      background: #ffffff;
+    }
+    .header {
+      background: #1e3a6e;
+      color: white;
+      padding: 11px 14px;
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.01em;
+    }
+    .body { padding: 12px 14px; }
+    .label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9399a6;
+      margin-bottom: 4px;
+    }
+    .student-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 9px;
+      background: #f0f4ff;
+      border: 1px solid #c8d6f5;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .student-row .icon { font-size: 14px; flex-shrink: 0; }
+    .student-row .student-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #6b7280;
+      white-space: nowrap;
+    }
+    .student-row .student-name {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #1e3a6e;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .student-row.none .student-name { color: #9399a6; font-weight: 400; font-style: italic; }
+    .folder-name {
+      font-size: 12px;
+      background: #f4f6fb;
+      border: 1px solid #dde2ee;
+      border-radius: 5px;
+      padding: 6px 9px;
+      color: #2b3044;
+      margin-bottom: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-height: 31px;
+      display: flex;
+      align-items: center;
+    }
+    #select-btn {
+      width: 100%;
+      padding: 8px 12px;
+      background: #1e3a6e;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-bottom: 10px;
+    }
+    #select-btn:hover { background: #0f2453; }
+    #select-btn:disabled { background: #7a90bb; cursor: not-allowed; }
+    #status-msg {
+      font-size: 11px;
+      min-height: 15px;
+      margin-bottom: 10px;
+      color: #6b7280;
+    }
+    #status-msg.ok    { color: #1d7a3a; }
+    #status-msg.error { color: #be2318; }
+    #status-msg.warn  { color: #b45309; }
+    .tip {
+      font-size: 11.5px;
+      color: #6b7280;
+      line-height: 1.55;
+      border-top: 1px solid #eaecf0;
+      padding-top: 11px;
+    }
+    .tip strong { color: #2b3044; }
+  </style>
+</head>
+<body>
+  <div class="header">📎 Moodle Feedback Helper</div>
+  <div class="body">
+    <div id="student-row" class="student-row none">
+      <span class="icon">👤</span>
+      <span class="student-label">Grading</span>
+      <span class="student-name" id="student-name">Not on a grading page</span>
+    </div>
+    <div class="label">Feedback folder</div>
+    <div class="folder-name" id="folder-display">No folder selected yet</div>
+    <button id="select-btn">📁 Select Feedback Folder</button>
+    <div id="status-msg"></div>
+    <div class="tip">
+      The panel appears automatically on Moodle grading pages and matches files to the current student.<br><br>
+      You must be on a <strong>Moodle page</strong> when selecting the folder.
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
